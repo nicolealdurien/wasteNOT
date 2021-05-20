@@ -33,11 +33,17 @@
 		<p>Don't have an account yet? <a href="/register">Sign up here.</a><br><br>
 		</p>
 		<br>
-		<form class="nice-form" method="POST" action="/login">
+		<form class="nice-form" id="main-login" method="POST" action="/login">
 		<input type="text" placeholder="Email address" name="emailAsUsername" /><br>
 		<br><br>
 		<input type="password" placeholder="Password" name="password" /><br><br>
         <button class="btn">Sign In</button>
+        </form>
+
+		<form class="nice-form" id="guest-login" method="POST" action="/login">
+		<input type="hidden" value="guest@user.com" name="emailAsUsername" />
+		<input type="hidden" value="guestuser" name="password" /><br><br>
+        <button class="btn">Login As Guest</button>
         </form>
 	</section>
 
