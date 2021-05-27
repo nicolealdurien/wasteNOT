@@ -58,18 +58,8 @@ router.post('/login', async (req, res) => {
 // add new restaurant user
 router.post('/register', async (req, res) => {
     
-    const emailAsUsername = req.body.emailAsUsername;
-    let password = req.body.password
-    const firstName = req.body.firstName
-    const lastName = req.body.lastName
-    const restaurantName = req.body.restaurantName
-    const restaurantStreetAddress = req.body.restaurantStreetAddress
-    const address = req.body.address
-    const city = req.body.city
-    const state = req.body.state
-    const zip = req.body.zip
-    const phone = req.body.phone
-    const website = req.body.website
+    let { emailAsUsername, password, firstName, lastName, restaurantName, restaurantStreetAddress,
+        city, state, zip, phone, website } = req.body;
 
     const salt = await bcrypt.genSalt(10)
     let hashedPassword = await bcrypt.hash(password, salt)
@@ -79,32 +69,25 @@ router.post('/register', async (req, res) => {
         }
     })
     
-    if(!registeredUser){
+    if(!registeredUser) {
        
-    let newUser = models.User.build({
-        emailAsUsername: emailAsUsername,           
-        password: hashedPassword,
-        firstName: firstName,
-        lastName: lastName,
-        restaurantName: restaurantName,
-        restaurantStreetAddress: restaurantStreetAddress,
-        city: city,
-        state: state,
-        zip: zip,
-        phone: phone,
-        website: website
+        let newUser = models.User.build({
+            emailAsUsername,           
+            password: hashedPassword,
+            firstName, lastName, restaurantName, restaurantStreetAddress,
+            city, state, zip, phone, website
     })
 
     let savedUser = await newUser.save()
 
     if(savedUser != null) {
-        res.render('login', {newUserMessage: 'New restaurant partner saved successfully!'})
-    }else{
-        res.render('register',{message:"Username already exists."})
+        res.render('login', { newUserMessage: 'New restaurant partner saved successfully!' })
+    } else {
+        res.render('register', { message:"Username already exists." })
     }
 
-    } else{
-        res.render('register',{message:"Username already exists."})
+    } else {
+        res.render('register', { message:"Username already exists." })
     }
     
 })
