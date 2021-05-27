@@ -49,3 +49,8 @@ Node.js, Express.js, Javascript, Mustache, HTML/CSS, Heroku, ElephantSQL
 
 
 ![](https://github.com/nicolealdurien/wasteNOT/blob/master/static/img/foodbankpages.png?raw=true)
+
+
+* **Code Snippet for New Restaurant Registration:**
+
+![](https://github.com/nicolealdurien/wasteNOT/blob/master/static/img/snippet.png?raw=true)
