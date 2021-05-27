@@ -52,5 +52,3 @@ Node.js, Express.js, Javascript, Mustache, HTML/CSS, Heroku, ElephantSQL
 
 
 * **Code Snippet for New Restaurant Registration:**
-
-![](https://github.com/nicolealdurien/wasteNOT/blob/master/static/img/snippet.png?raw=true)

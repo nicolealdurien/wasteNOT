@@ -76,15 +76,15 @@ router.post('/register', async (req, res) => {
             password: hashedPassword,
             firstName, lastName, restaurantName, restaurantStreetAddress,
             city, state, zip, phone, website
-    })
+        })
 
-    let savedUser = await newUser.save()
+        let savedUser = await newUser.save()
 
-    if(savedUser != null) {
-        res.render('login', { newUserMessage: 'New restaurant partner saved successfully!' })
-    } else {
-        res.render('register', { message:"Username already exists." })
-    }
+        if(savedUser != null) {
+            res.render('login', { newUserMessage: 'New restaurant partner saved successfully!' })
+        } else {
+            res.render('register', { message:"Username already exists." })
+        }
 
     } else {
         res.render('register', { message:"Username already exists." })
