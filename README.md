@@ -2,7 +2,7 @@
 # wasteNOT
 
 * **Live link:**
-https://wastenotprogram.herokuapp.com
+https://wastenotorg.herokuapp.com
 
 ![](https://github.com/nicolealdurien/wasteNOT/blob/master/static/img/frontpage.png?raw=true)
 <br /> <br /><br />
