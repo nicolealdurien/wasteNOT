@@ -91,13 +91,14 @@ router.get('/add-foodbank', (req, res) => {
 
 // add a foodbank
 router.post('/add-foodbank', async (req, res) => {
-    const name = req.body.name
-    const address = req.body.address
-    const city = req.body.city
-    const state = req.body.state
-    const zip = req.body.zip
-    const phone = req.body.phone
-    const hours = req.body.hours
+    const { name, address, city, state, zip, phone, hours } = req.body
+    // const name = req.body.name
+    // const address = req.body.address
+    // const city = req.body.city
+    // const state = req.body.state
+    // const zip = req.body.zip
+    // const phone = req.body.phone
+    // const hours = req.body.hours
     
     let foodbank = models.Foodbank.build({
         name: name,
