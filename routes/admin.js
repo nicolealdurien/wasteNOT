@@ -13,25 +13,22 @@ router.get('/add-admin', (req, res) => {
 // add new admin user
 router.post('/add-admin', async (req, res) => {
 
-    const emailAsUsername = req.body.emailAsUsername;
-    let password = req.body.password
-    const firstName = req.body.firstName
-    const lastName = req.body.lastName
+    const { emailAsUsername, password, firstName, lastName } = req.body
 
     const salt = await bcrypt.genSalt(10)
     let hashedPassword = await bcrypt.hash(password, salt)
     let registeredAdmin = await models.Admins.findOne({
-        where:{
-            emailAsUsername: emailAsUsername
+        where: {
+            emailAsUsername
         }
     })
     if(!registeredAdmin){
        
         let newAdmin = models.Admins.build({
-            emailAsUsername: emailAsUsername,           
+            emailAsUsername,           
             password: hashedPassword,
-            firstName: firstName,
-            lastName: lastName
+            firstName,
+            lastName
         })
 
         let savedAdmin = await newAdmin.save()
@@ -52,17 +49,15 @@ router.post('/add-admin', async (req, res) => {
 router.get('/all-donations', (req, res) => {   
     // res.render('all-donations')
         models.FoodDonation.findAll({
-            where: {isDonationComplete: 'false' },
+            where: { isDonationComplete: 'false' },
             include:[
                 {
                     model: models.User,
-                     as: 'user'
+                    as: 'user'
                 }
-            
             ]
-
 }).then((donations) => {
-        res.render('all-donations', {donations: donations})
+        res.render('all-donations', { donations: donations })
     })
 })
 
@@ -73,7 +68,6 @@ router.post('/delete-donation', (req, res) => {
     const donationId = req.body.donationId
 
     models.FoodDonation.update({
-
         isDonationComplete:'true'},
         {
         where: {
@@ -94,13 +88,7 @@ router.post('/add-foodbank', async (req, res) => {
     const { name, address, city, state, zip, phone, hours } = req.body
     
     let foodbank = models.Foodbank.build({
-        name: name,
-        address: address,
-        city: city,
-        state: state,
-        zip: zip,
-        phone: phone,
-        hours: hours
+        name, address, city, state, zip, phone, hours
     })
 
     foodbank.save()
