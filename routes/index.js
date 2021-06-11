@@ -23,8 +23,7 @@ router.get('/register', (req, res) => {
 
 router.post('/login', async (req, res) => {
 
-    let emailAsUsername = req.body.emailAsUsername
-    let password = req.body.password
+    let { emailAsUsername, password } = req.body
 
     let user = await models.User.findOne( {
         where: {
@@ -127,16 +126,15 @@ router.get('/admin-login', (req,res)=>{
 })
 
 router.post('/admin-login', async (req, res) => {
-console.log("admin login")
-    let emailAsUsername = req.body.emailAsUsername
-    let password = req.body.password
+    
+    let { emailAsUsername, password } = req.body
 
     let admin = await models.Admins.findOne( {
         where: {
             emailAsUsername: emailAsUsername
         }
     }) 
-    console.log(admin)
+    
     if (admin != null) {
         bcrypt.compare(password, admin.password, (error, result) => {
 
@@ -145,18 +143,18 @@ console.log("admin login")
                 //create a session
                 if(req.session) {
                     console.log("session exists")
-                    req.session.user = {userId: admin.id}
+                    req.session.user = { userId: admin.id }
                     res.redirect('/admin/all-donations')
                 }
 
             } else {
                 console.log('not working')
-                res.render('admin-login', {message: 'Incorrect email or password.'})
+                res.render('admin-login', { message: 'Incorrect email or password.' })
             }
         })
     } else {
         console.log('admin-is-null')
-        res.render('admin-login', {message: 'Incorrect email or password.'})
+        res.render('admin-login', { message: 'Incorrect email or password.' })
         
 
     }

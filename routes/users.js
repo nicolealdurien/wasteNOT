@@ -25,29 +25,14 @@ router.get('/update-profile/:userId', (req, res) => {
 router.post('/update-profile/:userId', (req, res) => {
 
     const userId = req.params.userId
-    const emailAsUsername = req.body.emailAsUsername;
-    const firstName = req.body.firstName
-    const lastName = req.body.lastName
-    const restaurantName = req.body.restaurantName
-    const restaurantStreetAddress = req.body.restaurantStreetAddress
-    const address = req.body.address
-    const city = req.body.city
-    const state = req.body.state
-    const zip = req.body.zip
-    const phone = req.body.phone
-    const website = req.body.website
+    const { emailAsUsername, firstName, lastName
+            restaurantName, restaurantStreetAddress, city
+            state, zip, phone, website } = req.body
 
     models.User.update({
-        emailAsUsername: emailAsUsername,           
-        firstName: firstName,
-        lastName: lastName,
-        restaurantName: restaurantName,
-        restaurantStreetAddress: restaurantStreetAddress,
-        city: city,
-        state: state,
-        zip: zip,
-        phone: phone,
-        website: website
+        emailAsUsername, firstName, lastName,
+        restaurantName, restaurantStreetAddress, city,
+        state, zip, phone, website
     }, {
         where: {
             id: userId
@@ -69,7 +54,6 @@ router.post('/donation', async (req, res) => {
 
     let foodDonation = await models.FoodDonation.build({
         itemName: itemName,
-
         estimatedQty: estimatedQty,
         estimatedExpiration: estimatedExpiration,
         isReadyToEat: isReadyToEat,
