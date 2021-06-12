@@ -27,20 +27,18 @@ router.post('/add-admin', async (req, res) => {
         let newAdmin = models.Admins.build({
             emailAsUsername,           
             password: hashedPassword,
-            firstName,
-            lastName
+            firstName, lastName
         })
 
         let savedAdmin = await newAdmin.save()
 
-    if(savedAdmin != null) {
-        res.render('admin-login', {newAdminMessage: 'New admin saved successfully!' })
-    }else{
-        res.render('add-admin',{message:"Username already exists."})
-    }
-
-    } else{
-        res.render('add-admin',{message:"Username already exists."})
+        if(savedAdmin != null) {
+            res.render('admin-login', { newAdminMessage: 'New admin saved successfully!' })
+        } else {
+            res.render('add-admin', { message:"Username already exists." })
+        }
+    } else {
+        res.render('add-admin', { message:"Username already exists." })
     }
 
 })

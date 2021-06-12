@@ -37,7 +37,7 @@ router.post('/login', async (req, res) => {
 
                 //create a session
                 if(req.session) {
-                    req.session.user = {userId: user.id}
+                    req.session.user = { userId: user.id }
                     res.redirect('/users/profile')
                 }
                 
@@ -57,7 +57,8 @@ router.post('/login', async (req, res) => {
 // add new restaurant user
 router.post('/register', async (req, res) => {
     
-    let { emailAsUsername, password, firstName, lastName, restaurantName, restaurantStreetAddress,
+    let { emailAsUsername, password, firstName,
+        lastName, restaurantName, restaurantStreetAddress,
         city, state, zip, phone, website } = req.body;
 
     const salt = await bcrypt.genSalt(10)

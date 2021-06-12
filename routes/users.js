@@ -25,8 +25,8 @@ router.get('/update-profile/:userId', (req, res) => {
 router.post('/update-profile/:userId', (req, res) => {
 
     const userId = req.params.userId
-    const { emailAsUsername, firstName, lastName
-            restaurantName, restaurantStreetAddress, city
+    const { emailAsUsername, firstName, lastName,
+            restaurantName, restaurantStreetAddress, city,
             state, zip, phone, website } = req.body
 
     models.User.update({
@@ -45,38 +45,32 @@ router.post('/update-profile/:userId', (req, res) => {
 
 // add new food donation to DB
 router.post('/donation', async (req, res) => {
-    const itemName = req.body.itemName
     const estimatedQty = parseInt(req.body.estimatedQty)
-    const estimatedExpiration = req.body.estimatedExpiration
-    const isReadyToEat = req.body.isReadyToEat
-    const storageTemp = req.body.storageTemp
+    const { itemName, estimatedExpiration, isReadyToEat, storageTemp } = req.body
     const userId = req.session.user.userId
 
     let foodDonation = await models.FoodDonation.build({
-        itemName: itemName,
-        estimatedQty: estimatedQty,
-        estimatedExpiration: estimatedExpiration,
-        isReadyToEat: isReadyToEat,
-        storageTemp: storageTemp,
-        userId: userId
+        itemName, estimatedQty, estimatedExpiration,
+        isReadyToEat, storageTemp, userId
     })
 
     let persistedProduct = await foodDonation.save()
+
     if(persistedProduct != null) {
         res.render('profile', {message: 'Thank you for your donation! One of our volunteers will arrive shortly to pick it up.'})
 
-    }else {
+    } else {
     res.render('profile', {message: 'Thank you for your donation! One of our volunteers will arrive shortly to pick it up.'})
     }
 })
 
-router.get('/past-donations', (req,res)=>{
+router.get('/past-donations', (req,res) => {
     console.log(req.session)
     models.FoodDonation.findAll({
-        where:{userId: req.session.user.userId}
+        where: { userId: req.session.user.userId }
 
-    }).then((donations)=>{
-        res.render('past-donations', {donations:donations})
+    }).then((donations) => {
+        res.render('past-donations', { donations:donations })
     }
    
 )})
