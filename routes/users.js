@@ -57,10 +57,10 @@ router.post('/donation', async (req, res) => {
     let persistedProduct = await foodDonation.save()
 
     if(persistedProduct != null) {
-        res.render('profile', {message: 'Thank you for your donation! One of our volunteers will arrive shortly to pick it up.'})
+        res.render('profile', { message: 'Thank you for your donation! One of our volunteers will arrive shortly to pick it up.' })
 
     } else {
-    res.render('profile', {message: 'Thank you for your donation! One of our volunteers will arrive shortly to pick it up.'})
+    res.render('profile', { message: 'Thank you for your donation! One of our volunteers will arrive shortly to pick it up.' })
     }
 })
 

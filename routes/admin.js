@@ -90,7 +90,7 @@ router.post('/add-foodbank', async (req, res) => {
     })
 
     foodbank.save()
-    res.render('add-foodbank', {message: 'New food bank location has been saved.'})
+    res.render('add-foodbank', { message: 'New food bank location has been saved.' })
 })
 
 

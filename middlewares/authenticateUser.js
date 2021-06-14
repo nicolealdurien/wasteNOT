@@ -1,14 +1,14 @@
 
 
-function authenticateUser(req,res,next){
-    if(req.session){
-        if(req.session.user){
+function authenticateUser(req, res, next) {
+    if(req.session) {
+        if(req.session.user) {
             res.locals.userId = req.session.user.userId
             next()
-        }else{
+        } else {
             res.redirect('/login')
         }
-    }else {
+    } else {
         res.redirect('/login')
     }
 }

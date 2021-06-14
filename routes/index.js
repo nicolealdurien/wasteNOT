@@ -110,7 +110,7 @@ router.get('/logout', (req, res, next) => {
 router.get('/foodbank', (req, res) => {
     models.User.findAll({})
     .then(users => {
-        res.render('foodbank', {users: users})
+        res.render('foodbank', { users: users })
     })
 })
 
@@ -118,7 +118,7 @@ router.get('/foodbank', (req, res) => {
 router.get('/locations', (req, res) => {
     models.Foodbank.findAll({})
     .then(foodbanks => {
-        res.render('locations', {foodbanks: foodbanks})
+        res.render('locations', { foodbanks: foodbanks })
     })
 })
 
